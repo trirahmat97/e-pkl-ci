@@ -1,0 +1,23 @@
+#showMhs
+CREATE VIEW showMhs AS 
+SELECT a.id, a.user_id, a.npm, a.nama, p.nama as nama_prodi, j.nama as nama_jurusan
+from mahasiswa a, prodi p, jurusan j
+WHERE a.prodi_id = p.id AND p.jurusan_id = j.id
+
+#showUser
+CREATE VIEW showUser AS 
+SELECT
+    p.id,
+    p.username,
+    p.password,
+    p.email,
+    c1.id as child_id,
+    c1.username as child_name,
+    c1.password as child_password,
+    c1.email as child_email
+FROM 
+    users as p
+LEFT JOIN users as c1
+    ON c1.parent = p.id
+WHERE
+    p.parent is null
